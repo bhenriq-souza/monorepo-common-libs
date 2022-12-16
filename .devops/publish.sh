@@ -1,6 +1,6 @@
 #! /bin/bash
 
-AFFECTED=$(npx nx print-affected --type=lib --select=projects)
+AFFECTED=$(npx nx print-affected --base=origin/main~1 --head=origin/main --select=projects)
 LIBS=($(echo $AFFECTED | tr ", " "\n"))
 
 echo $LIBS
