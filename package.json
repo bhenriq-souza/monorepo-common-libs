@@ -2,7 +2,12 @@
   "name": "monorepo-common-libs",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "npx nx affected --target=build",
+    "check": "npm run lint && npm run test",
+    "lint": "npx nx affected --target=lint",
+    "test": "npx nx affected --target=test"
+  },
   "private": false,
   "dependencies": {
     "tslib": "^2.3.0"
