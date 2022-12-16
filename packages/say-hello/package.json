@@ -1,5 +1,9 @@
 {
   "name": "@bhenriq-souza/say-hello",
   "version": "0.0.1",
-  "type": "commonjs"
+  "type": "commonjs",
+  "repository":"https://github.com/bhenriq-souza/monorepo-common-libs",
+  "publishConfig": {
+    "@bhenriq-souza:registry": "https://npm.pkg.github.com"
+  }
 }
