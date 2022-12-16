@@ -1,0 +1,8 @@
+{
+  "name": "@bhenriq-souza/message-logger",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "publishConfig": {
+    "@bhenriq-souza:registry": "https://npm.pkg.github.com"
+  }
+}

@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@bhenriq-souza/message-logger": ["packages/message-logger/src/index.ts"],
+      "@bhenriq-souza/say-hello": ["packages/say-hello/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
