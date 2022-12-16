@@ -54,7 +54,7 @@ jobs:
 
           for LIB in "${LIBS[@]}"
           do
-
+            cat ${PWD}/dist/packages/${LIB}/.npmrc
             echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN\n@bhenriq-souza:registry=https://npm.pkg.github.com" > ${PWD}/dist/packages/${LIB}/.npmrc
 
             ls -la ${PWD}/dist/packages/${LIB}
