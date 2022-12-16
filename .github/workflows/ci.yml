@@ -42,22 +42,24 @@ jobs:
       - name: Run build
         run: |
             npm run build
-      
-      - name: Log into NPM
-        env:
-          NPM_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          npm config set //npm.pkg.github.com/:_authToken=$NPM_TOKEN
-          export NPM_USERNAME=bhenriq-souza
-          export NPM_PASSWORD=$NPM_TOKEN
-          export NPM_EMAIL=bhenriq.souza@gmail.com
-
-          npm login registry=@bhenriq-souza:registry=https://npm.pkg.github.com/ <<!
-          $NPM_USERNAME
-          $NPM_PASSWORD
-          $NPM_EMAIL
-          !
 
       - name: Publish components (Github packages)
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          chmod +x ${PWD}/.devops/publish.sh && ${PWD}/.devops/publish.sh
+          AFFECTED=$(npx nx print-affected --base=origin/main~1 --head=origin/main --select=projects)
+          LIBS=($(echo $AFFECTED | tr ", " "\n"))
+
+          echo $LIBS
+
+          for LIB in "${LIBS[@]}"
+          do
+
+            echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN\n@bhenriq-souza:registry=https://npm.pkg.github.com" > ${PWD}/dist/packages/${LIB}/.npmrc
+
+            ls -la ${PWD}/dist/packages/${LIB}
+
+            printf "Publishing $LIB... \n"
+            npx nx publish $LIB --args="--version=1.0.0"
+            wait
+          done
