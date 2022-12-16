@@ -45,7 +45,7 @@ jobs:
 
       - name: Print PWD
         run: |
-          echo ${PWD}
+          ls -la ${PWD}
           env
       
       # - name: Publish components (Github packages)
