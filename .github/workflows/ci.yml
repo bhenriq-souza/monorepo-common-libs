@@ -38,34 +38,19 @@ jobs:
         run: |
           echo "Running NPM check"
           npm run check
-
-      - name: Run build
-        run: |
-            npm run build
-
-      - name: Print PWD
-        run: |
-          npm run build
-          ls -la ${PWD}
-          # env
       
-      # - name: Publish components (Github packages)
-      #   env:
-      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: |
-      #     AFFECTED=$(npx nx print-affected --base=origin/main~1 --head=origin/main --select=projects)
-      #     LIBS=($(echo $AFFECTED | tr ", " "\n"))
+      - name: Publish components (Github packages)
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          AFFECTED=$(npx nx print-affected --base=origin/main~1 --head=origin/main --select=projects)
+          LIBS=($(echo $AFFECTED | tr ", " "\n"))
 
-      #     echo $LIBS
+          echo $LIBS
 
-      #     for LIB in "${LIBS[@]}"
-      #     do
-      #       cat ${PWD}/dist/packages/${LIB}/.npmrc
-      #       echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN\n@bhenriq-souza:registry=https://npm.pkg.github.com" > ${PWD}/dist/packages/${LIB}/.npmrc
-
-      #       ls -la ${PWD}/dist/packages/${LIB}
-
-      #       printf "Publishing $LIB... \n"
-      #       npx nx publish $LIB --args="--version=1.0.0"
-      #       wait
-      #     done
+          for LIB in "${LIBS[@]}"
+          do
+            printf "Publishing $LIB... \n"
+            npx nx publish $LIB --args="--version=1.0.0"
+            wait
+          done
