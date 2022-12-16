@@ -42,9 +42,13 @@ jobs:
       - name: Run build
         run: |
             npm run build
-            
-      - name: Publish components (Github packages)
+      
+      - name: Log into NPM
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: chmod +x ${PWD}/.devops/publish.sh && ${PWD}/.devops/publish.sh
+        run: |
+          npm config set //npm.pkg.github.com/:_authToken=$NPM_TOKEN
+
+      - name: Publish components (Github packages)
+        run: |
+          chmod +x ${PWD}/.devops/publish.sh && ${PWD}/.devops/publish.sh
