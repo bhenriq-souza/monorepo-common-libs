@@ -17,7 +17,7 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node tools/scripts/publish.mjs message-logger {args.ver} {args.tag}"
+        "command": "node tools/scripts/publish.mjs message-logger --version {args.version} --tag {args.tag}"
       },
       "dependsOn": ["build"]
     },
