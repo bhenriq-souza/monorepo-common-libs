@@ -45,8 +45,9 @@ jobs:
 
       - name: Print PWD
         run: |
+          npm run build
           ls -la ${PWD}
-          env
+          # env
       
       # - name: Publish components (Github packages)
       #   env:
