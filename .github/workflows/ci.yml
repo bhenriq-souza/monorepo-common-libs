@@ -52,12 +52,11 @@ jobs:
           export NPM_PASSWORD=$NPM_TOKEN
           export NPM_EMAIL=bhenriq.souza@gmail.com
 
-          npm adduser <<!
+          npm login registry=@bhenriq-souza:registry=https://npm.pkg.github.com/ <<!
           $NPM_USERNAME
           $NPM_PASSWORD
           $NPM_EMAIL
           !
-          
 
       - name: Publish components (Github packages)
         run: |

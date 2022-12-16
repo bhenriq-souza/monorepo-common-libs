@@ -62,9 +62,7 @@ try {
   );
 }
 
-const base = 'npm publish --registry https://npm.pkg.github.com'
-
-const command = tag ? base + ` --tag ${tag}` : base
+const command = tag ? `npm publish --access=public --tag ${tag}` : `npm publish --access=public`
 
 // Execute "npm publish" to publish
 execSync(command);
