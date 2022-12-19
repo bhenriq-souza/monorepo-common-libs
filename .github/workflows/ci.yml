@@ -34,22 +34,23 @@ jobs:
         run: |
           npm install
 
-      - name: Run check
-        run: |
-          echo "Running NPM check"
-          npm run check
+      # - name: Run check
+      #   run: |
+      #     echo "Running NPM check"
+      #     npm run check
       
       - name: Run build
         run: |
           echo "Build affected libs"
           npm run build
 
-      - name: Print PWD and CWD
+      - name: Print PWD
         run: |
           PWD=$(pwd)
-          CWD=$(cwd)
           echo "PWD = $PWD"
-          echo "CWD = $CWD"
+
+      - name: Print Available env
+        run: env
       
       - name: Publish components (Github packages)
         env:
@@ -65,7 +66,7 @@ jobs:
             printf "Preparing NPM to publish $LIB... \n"
             npx nx pre-publish $LIB --args="--token=$NPM_TOKEN" --verbose
 
-            printf "Publishing $LIB... \n"
-            npx nx publish $LIB --args="--version=1.0.0"
+            # printf "Publishing $LIB... \n"
+            # npx nx publish $LIB --args="--version=1.0.0"
             wait
           done
