@@ -17,7 +17,7 @@
     "pre-publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node tools/scripts/pre-publish.mjs message-logger --token {args.token}"
+        "command": "node tools/scripts/pre-publish.mjs message-logger --token {args.token} --verbose"
       }
     },
     "publish": {
