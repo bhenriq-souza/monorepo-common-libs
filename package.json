@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "npx nx affected --target=build",
+    "build": "npx nx affected --target=build --base=origin/main~1 --head=origin/main",
     "check": "npm run lint && npm run test",
     "lint": "npx nx affected --target=lint",
     "test": "npx nx affected --target=test"
