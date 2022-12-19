@@ -55,7 +55,7 @@ console.log(npmrcPath)
 const distPath = resolve(__root, 'dist/packages')
 console.log(import.meta.url)
 
-const distPathOutput = execSync(`ls -la ${libDistPath}`)
+const distPathOutput = execSync(`ls -la ${distPath}`)
  
 console.info(
   chalk.bold.green(`Content from ${distPath} path\n`)
