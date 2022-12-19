@@ -50,14 +50,22 @@ function checkArgsFlagsAndValues(flag) {
 const npmrcPath = resolve(__root, '.npmrc')
 invariant(existsSync(npmrcPath), '.npmrc file does not exists.')
 
+console.log(npmrcPath)
+
 const distPath = resolve(__root, 'dist/packages')
 invariant(existsSync(distPath), 'Build command should be ran in advance')
+
+console.log(distPath)
 
 const libDistPath = `${distPath}/${lib}`
 invariant(existsSync(libDistPath), 'Affected lib should be built in advance')
 
+console.log(libDistPath)
+
 const token = checkArgsFlagsAndValues(FLAGS.TOKEN)
 const registryStr = `\n//npm.pkg.github.com/:_authToken=${token}`
+
+console.log(token)
 
 try {
   const npmrcDistPath = `${libDistPath}/.npmrc`
