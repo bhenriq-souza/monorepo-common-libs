@@ -5,6 +5,10 @@ import { execSync } from 'child_process'
 import { cwd, argv } from 'process'
 import { appendFileSync, copyFileSync, existsSync } from 'fs'
 
+const FLAGS = {
+  TOKEN: '--token'
+}
+
 const [, , lib] = argv
 
 console.info(
