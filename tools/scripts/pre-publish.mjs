@@ -53,9 +53,9 @@ invariant(existsSync(npmrcPath), '.npmrc file does not exists.')
 console.log(npmrcPath)
 
 const distPath = resolve(__root, 'dist/packages')
+console.log(distPath)
 invariant(existsSync(distPath), 'Build command should be ran in advance')
 
-console.log(distPath)
 
 const libDistPath = `${distPath}/${lib}`
 invariant(existsSync(libDistPath), 'Affected lib should be built in advance')
