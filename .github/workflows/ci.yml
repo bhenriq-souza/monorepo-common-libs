@@ -44,13 +44,8 @@ jobs:
           echo "Build affected libs"
           npm run build
 
-      # - name: Print PWD
-      #   run: |
-      #     PWD=$(pwd)
-      #     echo "PWD = $PWD"
-
-      # - name: Print Available env
-      #   run: env
+      - name: Print Available env
+        run: env
       
       - name: Publish components (Github packages)
         env:
@@ -66,7 +61,7 @@ jobs:
             printf "Preparing NPM to publish $LIB... \n"
             npx nx pre-publish $LIB --args="--token=$NPM_TOKEN" --verbose
 
-            # printf "Publishing $LIB... \n"
-            # npx nx publish $LIB --args="--version=1.0.0"
+            printf "Publishing $LIB... \n"
+            npx nx publish $LIB --args="--version=1.0.0"
             wait
           done

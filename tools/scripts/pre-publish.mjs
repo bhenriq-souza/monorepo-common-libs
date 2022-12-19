@@ -5,26 +5,13 @@ import { execSync } from 'child_process'
 import { cwd, argv } from 'process'
 import { appendFileSync, copyFileSync, existsSync } from 'fs'
 
-console.info(
-  chalk.bold.green('Initiating pre-publish script\n')
-)
+const [, , lib] = argv
 
-const [,, lib] = argv
+console.info(
+  chalk.bold.green(`Initiating pre-publish script for ${lib}\n`)
+)
 
 const __root = cwd()
-
-const rootPathOutput = execSync(`ls -la ${__root}`)
- 
-console.info(
-  chalk.bold.green(`Content from ${__root} path\n`)
-)
-console.info(
-  chalk.bold.grey(rootPathOutput)
-)
-
-const FLAGS = {
-  TOKEN: '--token'
-}
 
 /**
  * Validates a given condition
@@ -56,6 +43,17 @@ function checkArgsFlagsAndValues(flag) {
   return value
 }
 
+function checkLibDistDirContent(lib, libDistPath) {
+  const output = execSync(`ls -la ${libDistPath}`)
+ 
+  console.info(
+    chalk.bold.green(`Content from ${lib} dist path\n`)
+  )
+  console.info(
+    chalk.bold.grey(output)
+  )
+}
+
 const npmrcPath = resolve(__root, '.npmrc')
 invariant(existsSync(npmrcPath), '.npmrc file does not exists.')
 
@@ -68,21 +66,11 @@ invariant(existsSync(libDistPath), 'Affected lib should be built in advance')
 const token = checkArgsFlagsAndValues(FLAGS.TOKEN)
 const registryStr = `\n//npm.pkg.github.com/:_authToken=${token}`
 
-console.log(token)
-
 try {
   const npmrcDistPath = `${libDistPath}/.npmrc`
   copyFileSync(npmrcPath, npmrcDistPath)
   appendFileSync(npmrcDistPath, registryStr)
-
-  const output = execSync(`ls -la ${libDistPath}`)
- 
-  console.info(
-    chalk.bold.green(`Content from ${lib} dist path\n`)
-  )
-  console.info(
-    chalk.bold.grey(output)
-  )
+  checkLibDistDirContent(lib, libDistPath)
 } catch (error) {
   console.log(error)
   console.error(
@@ -91,5 +79,5 @@ try {
 }
 
 console.info(
-  chalk.bold.green('.npmrc file written to affected libs directories.')
+  chalk.bold.green(`.npmrc file written to ${lib} directory.`)
 )
