@@ -34,10 +34,10 @@ jobs:
         run: |
           npm install
 
-      # - name: Run check
-      #   run: |
-      #     echo "Running NPM check"
-      #     npm run check
+      - name: Run check
+        run: |
+          echo "Running NPM check"
+          npm run check
       
       - name: Run build
         run: |
@@ -58,10 +58,15 @@ jobs:
 
           for LIB in "${LIBS[@]}"
           do
-            printf "Preparing NPM to publish $LIB... \n"
-            npx nx pre-publish $LIB --args="--token=$NPM_TOKEN" --verbose
+            printf "Getting NPM Package version to publish $LIB... \n"
+            PKG_VERSION=$(npx nx get-version $LIB)
 
-            printf "Publishing $LIB... \n"
-            npx nx publish $LIB --args="--version=1.0.0"
+            echo $PKG_VERSION
+
+            # printf "Preparing NPM to publish $LIB... \n"
+            # npx nx pre-publish $LIB --args="--token=$NPM_TOKEN" --verbose
+
+            # printf "Publishing $LIB... \n"
+            # npx nx publish $LIB --args="--version=$PKG_VERSION"  --verbose
             wait
           done
