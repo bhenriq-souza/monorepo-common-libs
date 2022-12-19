@@ -14,12 +14,6 @@
         "assets": ["packages/message-logger/*.md"]
       }
     },
-    "get-version": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "node tools/scripts/get-package-version.mjs message-logger"
-      }
-    },
     "pre-publish": {
       "executor": "nx:run-commands",
       "options": {
@@ -29,7 +23,7 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node tools/scripts/publish.mjs message-logger --version {args.version} --tag {args.tag}"
+        "command": "node tools/scripts/publish.mjs message-logger"
       }
     },
     "lint": {
