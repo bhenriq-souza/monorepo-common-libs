@@ -43,6 +43,13 @@ jobs:
         run: |
           echo "Build affected libs"
           npm run build
+
+      - name: Print PWD and CWD
+        run: |
+          PWD=$(pwd)
+          CWD=$(cwd)
+          echo "PWD = $PWD"
+          echo "CWD = $CWD"
       
       - name: Publish components (Github packages)
         env:
