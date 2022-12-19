@@ -14,12 +14,17 @@
         "assets": ["packages/message-logger/*.md"]
       }
     },
+    "pre-publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/pre-publish.mjs message-logger --token {args.token}"
+      }
+    },
     "publish": {
       "executor": "nx:run-commands",
       "options": {
         "command": "node tools/scripts/publish.mjs message-logger --version {args.version} --tag {args.tag}"
-      },
-      "dependsOn": ["build"]
+      }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",

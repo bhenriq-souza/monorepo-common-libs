@@ -7,7 +7,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write 
+  pull-requests: write
   issues: read
   packages: none
 
@@ -39,6 +39,11 @@ jobs:
           echo "Running NPM check"
           npm run check
       
+      - name: Run build
+        run: |
+          echo "Build affected libs"
+          npm run build
+      
       - name: Publish components (Github packages)
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -50,6 +55,9 @@ jobs:
 
           for LIB in "${LIBS[@]}"
           do
+            printf "Preparing NPM to publish $LIB... \n"
+            npx nx pre-publish $LIB --args="--token=$NPM_TOKEN"
+
             printf "Publishing $LIB... \n"
             npx nx publish $LIB --args="--version=1.0.0"
             wait
