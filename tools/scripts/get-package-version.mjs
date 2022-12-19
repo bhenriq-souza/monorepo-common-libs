@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs'
+import { cwd, argv } from 'process'
 
 const [, , lib] = argv
 
