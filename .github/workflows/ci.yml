@@ -61,7 +61,7 @@ jobs:
             printf "Getting NPM Package version to publish $LIB... \n"
             PKG_VERSION=$(npx nx get-version $LIB)
 
-            echo $PKG_VERSION
+            echo $PKG_VERSION\n
 
             # printf "Preparing NPM to publish $LIB... \n"
             # npx nx pre-publish $LIB --args="--token=$NPM_TOKEN" --verbose
