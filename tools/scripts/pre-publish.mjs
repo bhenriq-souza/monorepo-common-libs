@@ -15,7 +15,7 @@ const __root = cwd()
 
 console.log('Root path', __root)
 
-const rootPathOutput = execSync(`ls -la ${rootPathOutput}`)
+const rootPathOutput = execSync(`ls -la ${__root}`)
  
 console.info(
   chalk.bold.green(`Content from ${__root} path\n`)
