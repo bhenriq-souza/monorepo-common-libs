@@ -56,7 +56,7 @@ jobs:
           for LIB in "${LIBS[@]}"
           do
             printf "Preparing NPM to publish $LIB... \n"
-            npx nx pre-publish $LIB --args="--token=$NPM_TOKEN"
+            npx nx pre-publish $LIB --args="--token=$NPM_TOKEN" --verbose
 
             printf "Publishing $LIB... \n"
             npx nx publish $LIB --args="--version=1.0.0"
