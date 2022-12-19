@@ -53,7 +53,17 @@ invariant(existsSync(npmrcPath), '.npmrc file does not exists.')
 console.log(npmrcPath)
 
 const distPath = resolve(__root, 'dist/packages')
-console.log(distPath)
+console.log(import.meta.url)
+
+const distPathOutput = execSync(`ls -la ${libDistPath}`)
+ 
+console.info(
+  chalk.bold.green(`Content from ${distPath} path\n`)
+)
+console.info(
+  chalk.bold.grey(distPathOutput)
+)
+
 invariant(existsSync(distPath), 'Build command should be ran in advance')
 
 
